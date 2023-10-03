@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import CustomCard from "./CustomCard";
 import { fetchMovie } from "./utils/axiosHelper";
+import randomGenerator from "./utils/randomStr";
 
-const SearchForm = ({ addToMovieList}) => {
+const SearchForm = ({ addToMovieList, movieList }) => {
   const [movie, setMovie] = useState({});
   const [error, setError] = useState("");
 
@@ -14,12 +15,30 @@ const SearchForm = ({ addToMovieList}) => {
     setError("");
     const str = strRef.current.value;
     const data = await fetchMovie(str);
+
     if (data.Response === "True") {
-      setMovie(data);
+      const isM= movieList.find((movie) => movie.imdbID === data.imdbID);
+      if(!isM){
+        setMovie(data);
+      } else{
+        alert("Movie is already exist")
+      }
+      
     } else {
       setError(data.Error);
+      setMovie({});
     }
   };
+
+  useEffect(() => {
+    const randChar = randomGenerator();
+
+    // IEFE
+    (async () => {
+      const randomMovie = await fetchMovie(randChar);
+      setMovie(randomMovie);
+    })();
+  }, []);
 
   const func = (mode) => {
     console.log("Mode:", mode);

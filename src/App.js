@@ -6,7 +6,9 @@ import SearchForm from "./components/SearchForm";
 function App() {
   const [movieList, setMovieList] = useState([]);
   const addToMovieList = (movie) => {
-    setMovieList([...movieList, movie]);
+    //replace 
+    const filterArg = movieList.filter((item) => item.imdbID !== movie.imdbID);
+    setMovieList([...filterArg, movie]);
   };
 
 
@@ -24,7 +26,7 @@ function App() {
         {/* {Search area} */}
         {/* {=> form} */}
         {/* [=> card] */}
-        <SearchForm addToMovieList={addToMovieList}/>
+        <SearchForm addToMovieList={addToMovieList} movieList={movieList}/>
 
         {/* {movie list section} */}
         {/* {=> button} */}

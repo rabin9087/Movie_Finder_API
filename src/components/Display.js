@@ -12,6 +12,7 @@ const Display = ({ movieList, setMovieList }) => {
   const actionMovies = movieList.filter((movie) => movie.mode === "action");
 
   const displayMovieTypes = () => {
+  
     if (movieType === "all" || movieType === "") {
       return movieList;
     } else if (movieType === "happy") {
@@ -22,13 +23,10 @@ const Display = ({ movieList, setMovieList }) => {
   };
 
   const func =(mode) => {
+
     const updatedMovie = movieList.filter((movie) => movie.imdbID !== mode);
     setMovieList(updatedMovie);
   }
-
-  console.log("movieList", movieList);
-  console.log("happy", happyMovies);
-  console.log("action", actionMovies);
 
   return (
     <div className="bg-black p-5 rounded shadow-lg mt-5">
