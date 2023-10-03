@@ -12,7 +12,6 @@ const Display = ({ movieList, setMovieList }) => {
   const actionMovies = movieList.filter((movie) => movie.mode === "action");
 
   const displayMovieTypes = () => {
-  
     if (movieType === "all" || movieType === "") {
       return movieList;
     } else if (movieType === "happy") {
@@ -22,11 +21,10 @@ const Display = ({ movieList, setMovieList }) => {
     }
   };
 
-  const func =(mode) => {
-
+  const func = (mode) => {
     const updatedMovie = movieList.filter((movie) => movie.imdbID !== mode);
     setMovieList(updatedMovie);
-  }
+  };
 
   return (
     <div className="bg-black p-5 rounded shadow-lg mt-5">
@@ -64,7 +62,7 @@ const Display = ({ movieList, setMovieList }) => {
       <div className="row">
         <div className="col d-flex flex-wrap gap-3 justify-content-between">
           {displayMovieTypes().map((item, i) => (
-            <CustomCard key={i} movie={item} func={func}/>
+            <CustomCard key={i} movie={item} func={func} />
           ))}
         </div>
       </div>

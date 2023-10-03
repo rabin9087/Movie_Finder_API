@@ -17,13 +17,12 @@ const SearchForm = ({ addToMovieList, movieList }) => {
     const data = await fetchMovie(str);
 
     if (data.Response === "True") {
-      const isM= movieList.find((movie) => movie.imdbID === data.imdbID);
-      if(!isM){
+      const isM = movieList.find((movie) => movie.imdbID === data.imdbID);
+      if (!isM) {
         setMovie(data);
-      } else{
-        alert("Movie is already exist")
+      } else {
+        alert("Movie is already exist");
       }
-      
     } else {
       setError(data.Error);
       setMovie({});
